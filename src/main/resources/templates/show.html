@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.theamlead.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/stylesheet/style.css" th:href="@{/stylesheet/style.css}"/>
+    <title>Title</title>
+</head>
+<nav>
+    <ul class="nav">
+        <li class="navLi"><a class="active" th:href="@{http://localhost:8081/fricke/model}">Home</a></li>
+        <li class="navLi"><a href="#">Log In</a></li>
+        <li class="navLi"><a th:href="@{http://localhost:8081/fricke/model/topics}">Topics</a></li>
+        <li class="navLi"><a th:href="@{http://localhost:8081/fricke/model/topic}">Topic crete</a></li>
+    </ul>
+</nav>
+<body>
+<h1 th:text="${message}"></h1>
+<table class="table table-dark">
+    <thead>
+    <tr>
+        <th>Identifier</th>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+    <tbody>
+    <tr th:each="topic: ${topics}">
+        <td th:text="${topic.identifier}"></td>
+        <td th:text="${topic.name}"></td>
+        <td th:text="${topic.description}"></td>
+    </tr>
+</tbody>
+    </thead>
+</table>
+</body>
+</html>
