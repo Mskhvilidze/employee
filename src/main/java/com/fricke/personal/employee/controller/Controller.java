@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Iterator;
+
 
 @org.springframework.stereotype.Controller
 public class Controller {
@@ -48,7 +50,6 @@ public class Controller {
     public String getRegisterPage(Model model) {
         model.addAttribute("gamer", new Gamer());
         model.addAttribute("address", new Address());
-        //model.addAttribute("address", new Address());
         return "register";
     }
 
@@ -64,7 +65,14 @@ public class Controller {
 
     @RequestMapping(method = RequestMethod.GET, value = "/model/login")
     public String getLogin(Model model) {
-        model.addAttribute("", "");
+        model.addAttribute("gamer", new Gamer());
         return "login";
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/model/login")
+    public String getPostPersonLog(@ModelAttribute Gamer person, Model model) {
+        Iterator<Gamer> gamers = gamerService.getAllGamer();
+        //TODO Implementieren Login Page
+        return "redirect:/model";
     }
 }

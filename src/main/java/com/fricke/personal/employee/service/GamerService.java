@@ -12,11 +12,15 @@ public class GamerService {
     @Autowired
     private GamerRepository repository;
 
-    public Iterator<Gamer> getAllGamer(){
+    /**
+     * Return all Person from the database
+     * @return
+     */
+    public Iterator<Gamer> getAllGamer() {
         return repository.findAll().iterator();
     }
 
-    public void addGamer(Gamer gamer){
+    public void addGamer(Gamer gamer) {
         repository.save(gamer);
     }
 }
