@@ -6,8 +6,13 @@ import com.fricke.personal.employee.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 
 @org.springframework.stereotype.Controller
@@ -70,9 +75,18 @@ public class Controller {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/model/login")
-    public String getPostPersonLog(@ModelAttribute Gamer person, Model model) {
+    public String getPostPersonLog(@ModelAttribute Gamer person, Model model, RedirectAttributes attributes) {
         Iterator<Gamer> gamers = gamerService.getAllGamer();
-        //TODO Implementieren Login Page
-        return "redirect:/model";
+        Spliterator<Gamer> spliterator = Spliterators.spliteratorUnknownSize(gamers, Spliterator.ORDERED);
+        Stream<Gamer> stream = StreamSupport.stream(spliterator, false);
+        Gamer gamer = stream.filter(g -> g.getNickname().equals(person.getNickname()) &&
+                g.getPassword().equals(person.getPassword())).findAny().orElse(null);
+        if (gamer != null) {
+            attributes.addFlashAttribute("successful", "Login is successful");
+            return "redirect:/model";
+        } else {
+            model.addAttribute("message", "Not Exist");
+            return "login";
+        }
     }
 }

@@ -104,3 +104,18 @@ li.navLi a:hover:not(.active) {
 .btn:hover {
     opacity: 1;
 }
+
+/*Login*/
+/*Error*/
+.isa_error {
+    color: #D8000C;
+    background-color: #FFD2D2;
+    text-align: center;
+}
+
+/*Successful*/
+.isa_success {
+    color: #4F8A10;
+    background-color: #DFF2BF;
+    text-align: center;
+}
