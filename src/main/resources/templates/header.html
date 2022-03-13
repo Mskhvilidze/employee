@@ -1,27 +1,43 @@
 <!DOCTYPE html>
-<html xmlns:th = "http://www.theamlead.org">
+<!--suppress XmlUnboundNsPrefix -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/static/stylesheet/style.css" th:href="@{/stylesheet/style.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script th:outline="javascript" th:src="@{/js/show.js}"></script>
     <title>Home</title>
 </head>
 <nav>
     <ul class="nav">
-        <li class="navLi"><a class="active" th:href="@{http://localhost:8081/fricke/model}">Home</a></li>
-        <li class="navLi"><a th:href="@{http://localhost:8081/fricke/model/login}">Log In</a></li>
-        <li class="navLi"><a th:href="@{http://localhost:8081/fricke/model/topics}">Topics</a></li>
-        <li class="navLi"><a th:href="@{http://localhost:8081/fricke/model/topic}">Topic crete</a></li>
+        <li class="navLi"><a class="active" th:href="@{http://localhost:8086/fricke/model}">Home</a></li>
+        <li class="navLi" id="logIN"><a th:href="@{http://localhost:8086/fricke/model/login}">Log
+            In</a></li>
+        <li class="navLi"><a th:href="@{http://localhost:8086/fricke/model/topics}">Topics</a></li>
+        <li class="navLi"><a th:href="@{http://localhost:8086/fricke/model/topic}">Topic crete</a></li>
     </ul>
 </nav>
 <body>
 <h1 th:text="${message}"/>
 <br>
 <div class="isa_success" style="max-width:500px;margin:auto">
-<p th:text="${successful}"></p>
+    <p th:text="${successful}"></p>
 </div>
 <br>
-<a th:href="@{http://localhost:8081/fricke/model/topic}">Topic crete</a>
+<a th:href="@{http://localhost:8086/fricke/model/topic}">Topic crete</a>
 <br>
-<a th:href="@{http://localhost:8081/fricke/model/register}">Registration</a>
+<a th:href="@{http://localhost:8086/fricke/model/register}" id="headReg">Registration</a>
 </body>
 </html>
+
+<script th:inline="javascript">
+    let userSession = [[${session.name}]];
+    if (userSession != null) {
+        document.getElementById("logIN").style.display = "none";
+        document.getElementById("headReg").style.display = "none";
+    } else {
+        document.getElementById("logIN").style.display = "block";
+        document.getElementById("headReg").style.display = "block";
+    }
+</script>

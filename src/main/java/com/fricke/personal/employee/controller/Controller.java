@@ -4,10 +4,13 @@ import com.fricke.personal.employee.service.AddressService;
 import com.fricke.personal.employee.service.GamerService;
 import com.fricke.personal.employee.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import javax.servlet.http.HttpSession;
+import java.net.http.HttpResponse;
 import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.Spliterators;
@@ -26,40 +29,40 @@ public class Controller {
     private AddressService addressService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/model")
-    public String getPage(Model model) {
+    public String getPage(Model model, HttpSession session) {
         model.addAttribute("message", "Hello World");
         return "header";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/model/topic")
-    public String getEmployee(Model model) {
+    public String getEmployee(Model model, HttpSession session) {
         model.addAttribute("topic", new Topic());
         return "creation";
     }
 
     @RequestMapping(value = "/model/topic", method = RequestMethod.POST)
-    public String getEmployeeSubmit(@ModelAttribute Topic topic, Model model) {
+    public String getEmployeeSubmit(@ModelAttribute Topic topic, Model model, HttpSession session) {
         model.addAttribute("topic", topic);
         service.addTopic(topic);
         return "redirect:/model/topics";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/model/topics")
-    public String getTopics(Model model) {
+    public String getTopics(Model model, HttpSession session) {
         model.addAttribute("message", "All Topics");
         model.addAttribute("topics", service.getAllTopic());
         return "show";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/model/register")
-    public String getRegisterPage(Model model) {
+    public String getRegisterPage(Model model, HttpSession session) {
         model.addAttribute("gamer", new Gamer());
         model.addAttribute("address", new Address());
         return "register";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/model/register")
-    public String getPostPerson(@ModelAttribute Gamer person, @ModelAttribute Address address, Model model) {
+    public String getPostPerson(@ModelAttribute Gamer person, @ModelAttribute Address address, Model model, HttpSession session) {
         model.addAttribute("gamer", person);
         model.addAttribute("address", address);
         gamerService.addGamer(person);
@@ -69,13 +72,13 @@ public class Controller {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/model/login")
-    public String getLogin(Model model) {
+    public String getLogin(Model model, HttpSession session) {
         model.addAttribute("gamer", new Gamer());
         return "login";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/model/login")
-    public String getPostPersonLog(@ModelAttribute Gamer person, Model model, RedirectAttributes attributes) {
+    public String getPostPersonLog(@ModelAttribute Gamer person, Model model, RedirectAttributes attributes, HttpSession session) {
         Iterator<Gamer> gamers = gamerService.getAllGamer();
         Spliterator<Gamer> spliterator = Spliterators.spliteratorUnknownSize(gamers, Spliterator.ORDERED);
         Stream<Gamer> stream = StreamSupport.stream(spliterator, false);
@@ -83,6 +86,7 @@ public class Controller {
                 g.getPassword().equals(person.getPassword())).findAny().orElse(null);
         if (gamer != null) {
             attributes.addFlashAttribute("successful", "Login is successful");
+            session.setAttribute("name", gamer.getNickname());
             return "redirect:/model";
         } else {
             model.addAttribute("message", "Not Exist");

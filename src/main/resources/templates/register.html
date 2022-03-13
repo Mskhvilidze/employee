@@ -9,13 +9,13 @@
 </head>
 <nav>
     <ul class="nav">
-        <li class="navLi"><a class="active" th:href="@{http://localhost:8081/fricke/model}">Home</a></li>
-        <li class="navLi"><a th:href="@{http://localhost:8081/fricke/model/login}">Log In</a></li>
-        <li class="navLi"><a th:href="@{http://localhost:8081/fricke/model/topics}">Topics</a></li>
-        <li class="navLi"><a th:href="@{http://localhost:8081/fricke/model/topic}">Topic crete</a></li>
+        <li class="navLi"><a class="active" th:href="@{http://localhost:8086/fricke/model}">Home</a></li>
+        <li class="navLi"><a th:href="@{http://localhost:8086/fricke/model/login}">Log In</a></li>
+        <li class="navLi"><a th:href="@{http://localhost:8086/fricke/model/topics}">Topics</a></li>
+        <li class="navLi"><a th:href="@{http://localhost:8086/fricke/model/topic}">Topic crete</a></li>
     </ul>
 </nav>
-<body>
+<body id="showMessageReg">
 
 
 <form name="register1" th:action="@{/model/register}" th:object="${gamer}" method="post"
@@ -80,12 +80,19 @@
     <div class="input-container" id="errorDiv" hidden>
         <span id="errorText"></span>
     </div>
-    <button type="submit" class="btn">Register</button>
+    <button type="submit" class="btn" id="Reg">Register</button>
 </form>
 </body>
 </html>
 
 <script th:inline="javascript">
+
+    let userSession = [[${session.name}]];
+    if (userSession != null){
+        document.getElementById("showMessageReg").style.display = "none";
+    }else{
+        document.getElementById("showMessageReg").style.display = "block";
+    }
 
     function checkPassword() {
         const mediumRegex = new RegExp("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})$");

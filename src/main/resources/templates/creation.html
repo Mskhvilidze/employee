@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress XmlUnboundNsPrefix -->
 <html xmlns:th="http://www.theamlead.org">
 <head>
     <meta charset="UTF-8">
@@ -7,10 +8,10 @@
 </head>
 <nav>
     <ul class="nav">
-        <li class="navLi"><a class="active" th:href="@{http://localhost:8081/fricke/model}">Home</a></li>
-        <li class="navLi"><a th:href="@{http://localhost:8081/fricke/model/login}">Log In</a></li>
-        <li class="navLi"><a th:href="@{http://localhost:8081/fricke/model/topics}">Topics</a></li>
-        <li class="navLi"><a th:href="@{http://localhost:8081/fricke/model/topic}">Topic crete</a></li>
+        <li class="navLi"><a class="active" th:href="@{http://localhost:8086/fricke/model}">Home</a></li>
+        <li class="navLi" id="logIN"><a th:href="@{http://localhost:8086/fricke/model/login}">Log In</a></li>
+        <li class="navLi"><a th:href="@{http://localhost:8086/fricke/model/topics}">Topics</a></li>
+        <li class="navLi"><a th:href="@{http://localhost:8086/fricke/model/topic}">Topic crete</a></li>
     </ul>
 </nav>
 <body>
@@ -18,11 +19,22 @@
 <h1>Topic create</h1>
 <form action="#" th:action="@{/model/topic}" th:object="${topic}" method="post">
     <p>Id: <input type="text" th:field="*{identifier}" name="Identifier"/></p>
-    <p>Message: <input type="text" th:field="*{name}" name = "Name"/></p>
+    <p>Message: <input type="text" th:field="*{name}" name="Name"/></p>
     <p>Description: <input type="text" th:field="*{description}" name="Description"/></p>
-    <p><input type="submit" value="submit" /></p>
+    <p><input type="submit" value="submit"/></p>
 </form>
 <p><input class="back" type="submit" value="back" th:value="back"
           th:onclick="location.href = '/fricke/model'"/></p></p>
 </body>
 </html>
+
+<script th:inline="javascript">
+    let userSession = [[${session.name}]];
+    if (userSession != null) {
+        document.getElementById("logIN").style.display = "none";
+        document.getElementById("headReg").style.display = "none";
+    } else {
+        document.getElementById("logIN").style.display = "block";
+        document.getElementById("headReg").style.display = "block";
+    }
+</script>
