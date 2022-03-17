@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/static/stylesheet/style.css" th:href="@{/stylesheet/style.css}"/>
     <script th:outline="javascript" th:src="@{/js/show.js}"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <title>Login</title>
 </head>
 <nav>
@@ -18,7 +19,7 @@
 </nav>
 <body id="showMessage">
 <form name="login" id="Log" th:action="@{/model/login}" th:object="${gamer}" method="post"
-      style="max-width:500px;margin:auto" onsubmit="myFunc('[[${session.name}]]')">
+      style="max-width:500px;margin:auto">
     <h2>Login Form</h2>
 
     <div class="input-container">
@@ -31,16 +32,17 @@
     </div>
     <button type="submit" class="btn">Login in</button>
 </form>
-
 <p class="isa_error" style="max-width:500px;margin:auto" th:text="${message}"></p>
 </body>
 </html>
 
 <script th:inline="javascript">
     let userSession = [[${session.name}]];
-    if (userSession != null){
+    if (userSession != null) {
         document.getElementById("showMessage").style.display = "none";
-    }else{
+        document.getElementById("logOut").hidden = false;
+    } else {
         document.getElementById("showMessage").style.display = "block";
+        document.getElementById("logOut").hidden = true;
     }
 </script>

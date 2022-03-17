@@ -14,6 +14,8 @@
         <li class="navLi"><a class="active" th:href="@{http://localhost:8086/fricke/model}">Home</a></li>
         <li class="navLi" id="logIN"><a th:href="@{http://localhost:8086/fricke/model/login}">Log
             In</a></li>
+        <li class="navLi" id="logOut"><a th:href="@{http://localhost:8086/fricke/model/logout}">Log
+            Out</a></li>
         <li class="navLi"><a th:href="@{http://localhost:8086/fricke/model/topics}">Topics</a></li>
         <li class="navLi"><a th:href="@{http://localhost:8086/fricke/model/topic}">Topic crete</a></li>
     </ul>
@@ -36,8 +38,10 @@
     if (userSession != null) {
         document.getElementById("logIN").style.display = "none";
         document.getElementById("headReg").style.display = "none";
+        document.getElementById("logOut").hidden = false;
     } else {
         document.getElementById("logIN").style.display = "block";
         document.getElementById("headReg").style.display = "block";
+        document.getElementById("logOut").hidden = true;
     }
 </script>

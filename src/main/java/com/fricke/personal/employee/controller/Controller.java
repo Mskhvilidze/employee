@@ -5,18 +5,15 @@ import com.fricke.personal.employee.service.GamerService;
 import com.fricke.personal.employee.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpSession;
-import java.net.http.HttpResponse;
 import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
-
 
 @org.springframework.stereotype.Controller
 public class Controller {
@@ -27,6 +24,10 @@ public class Controller {
     private GamerService gamerService;
     @Autowired
     private AddressService addressService;
+
+    public  Controller(){
+
+    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/model")
     public String getPage(Model model, HttpSession session) {
@@ -92,5 +93,12 @@ public class Controller {
             model.addAttribute("message", "Not Exist");
             return "login";
         }
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "model/logout")
+    public String getTest(Model model, HttpSession session, HttpStatus status, RedirectAttributes redirectAttributes){
+        session.removeAttribute("name");
+        redirectAttributes.addFlashAttribute("successful", "Logout is successful");
+        return "redirect:/model";
     }
 }

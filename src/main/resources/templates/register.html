@@ -90,8 +90,10 @@
     let userSession = [[${session.name}]];
     if (userSession != null){
         document.getElementById("showMessageReg").style.display = "none";
+        document.getElementById("logOut").hidden = false;
     }else{
         document.getElementById("showMessageReg").style.display = "block";
+        document.getElementById("logOut").hidden = true;
     }
 
     function checkPassword() {
