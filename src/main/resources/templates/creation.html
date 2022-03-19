@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <!--suppress XmlUnboundNsPrefix -->
-<html xmlns:th="http://www.theamlead.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Hello World</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/static/stylesheet/style.css" th:href="@{/stylesheet/style.css}"/>
 </head>
 <nav>
@@ -27,18 +29,39 @@
 </form>
 <p><input class="back" type="submit" value="back" th:value="back"
           th:onclick="location.href = '/fricke/model'"/></p></p>
+<button type="button" id="but" value="Button">Click</button>
+<p id="a"></p>
 </body>
 </html>
 
 <script th:inline="javascript">
     let userSession = [[${session.name}]];
     if (userSession != null) {
+        document.getElementById("logOut").hidden = false;
         document.getElementById("logIN").style.display = "none";
         document.getElementById("headReg").style.display = "none";
-        document.getElementById("logOut").hidden = false;
     } else {
+        document.getElementById("logOut").hidden = true;
         document.getElementById("logIN").style.display = "block";
         document.getElementById("headReg").style.display = "block";
-        document.getElementById("logOut").hidden = true;
     }
 </script>
+
+
+
+
+
+
+
+
+
+
+/*
+$(document).ready(function (){
+
+$("#but").click(function (){
+alert("Hi");
+$("#a").text("Aa");
+})
+})
+*/

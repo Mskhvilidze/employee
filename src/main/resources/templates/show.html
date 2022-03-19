@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <!--suppress XmlUnboundNsPrefix -->
-<html xmlns:th="http://www.theamlead.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/static/stylesheet/style.css" th:href="@{/stylesheet/style.css}"/>
@@ -40,12 +41,12 @@
 <script th:inline="javascript">
     let userSession = [[${session.name}]];
     if (userSession != null) {
+        document.getElementById("logOut").hidden = false;
         document.getElementById("logIN").style.display = "none";
         document.getElementById("headReg").style.display = "none";
-        document.getElementById("logOut").hidden = false;
     } else {
+        document.getElementById("logOut").hidden = true;
         document.getElementById("logIN").style.display = "block";
         document.getElementById("headReg").style.display = "block";
-        document.getElementById("logOut").hidden = true;
     }
 </script>

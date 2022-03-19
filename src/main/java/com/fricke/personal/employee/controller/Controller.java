@@ -101,4 +101,5 @@ public class Controller {
         redirectAttributes.addFlashAttribute("successful", "Logout is successful");
         return "redirect:/model";
     }
+    //TODO Session muss auf jede Page aufgelöst werden
 }
