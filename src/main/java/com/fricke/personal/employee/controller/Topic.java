@@ -1,10 +1,7 @@
 package com.fricke.personal.employee.controller;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -15,6 +12,9 @@ public class Topic {
     private String Identifier;
     private String name;
     private String description;
+    @ManyToOne(optional = false)
+    @JoinColumn
+    private Gamer gamer;
 
     public Topic() {
     }
@@ -23,6 +23,14 @@ public class Topic {
         this.Identifier = Identifier;
         this.name = name;
         this.description = description;
+    }
+
+    public Gamer getGamer() {
+        return gamer;
+    }
+
+    public void setGamer(Gamer gamer) {
+        this.gamer = gamer;
     }
 
     public void setIdentifier(String id) {

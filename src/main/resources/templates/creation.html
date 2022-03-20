@@ -21,16 +21,23 @@
 <body>
 <h1 th:text="${message}"></h1>
 <h1>Topic create</h1>
-<form action="#" th:action="@{/model/topic}" th:object="${topic}" method="post">
-    <p>Id: <input type="text" th:field="*{identifier}" name="Identifier"/></p>
-    <p>Message: <input type="text" th:field="*{name}" name="Name"/></p>
-    <p>Description: <input type="text" th:field="*{description}" name="Description"/></p>
-    <p><input type="submit" value="submit"/></p>
-</form>
+<br>
+<div class="no_success" id="noSess" style="max-width:500px;margin:auto">
+    <p th:text="${noSession}"></p>
+</div>
+<div class="createTopic">
+    <form action="#" th:action="@{/model/topic}" th:object="${topic}" method="post">
+        <label>Title</label>
+        <input class="myText" type="text" th:field="*{identifier}" name="Identifier"/>
+        <label>Message</label>
+        <input class="myText" type="text" th:field="*{name}" name="Name"/>
+        <label>Description</label>
+        <textarea class="myText" type="text" th:field="*{description}" name="Description" rows="10"/>
+    </form>
+</div>
+<p><input type="submit" value="submit"/></p>
 <p><input class="back" type="submit" value="back" th:value="back"
           th:onclick="location.href = '/fricke/model'"/></p></p>
-<button type="button" id="but" value="Button">Click</button>
-<p id="a"></p>
 </body>
 </html>
 
@@ -38,30 +45,19 @@
     let userSession = [[${session.name}]];
     if (userSession != null) {
         document.getElementById("logOut").hidden = false;
+        let cells = document.getElementsByClassName("myText");
+        for (let i = 0; i < cells.length; i++) {
+            cells[i].disabled = false;
+        }
         document.getElementById("logIN").style.display = "none";
         document.getElementById("headReg").style.display = "none";
     } else {
         document.getElementById("logOut").hidden = true;
+        let cells = document.getElementsByClassName("myText");
+        for (let i = 0; i < cells.length; i++) {
+            cells[i].disabled = true;
+        }
         document.getElementById("logIN").style.display = "block";
         document.getElementById("headReg").style.display = "block";
     }
 </script>
-
-
-
-
-
-
-
-
-
-
-/*
-$(document).ready(function (){
-
-$("#but").click(function (){
-alert("Hi");
-$("#a").text("Aa");
-})
-})
-*/

@@ -1,4 +1,4 @@
-input[type=submit], input[type=button]{
+input[type=submit], input[type=button] {
     background-color: #4CAF50;
     border: none;
     color: white;
@@ -8,7 +8,7 @@ input[type=submit], input[type=button]{
     cursor: pointer;
 }
 
-input.back[type=submit]{
+input.back[type=submit] {
     background-color: black;
     border: none;
     color: white;
@@ -18,12 +18,13 @@ input.back[type=submit]{
     cursor: pointer;
 }
 
-a{
-    color:#1F4F82;
-    text-decoration:none;
+a {
+    color: #1F4F82;
+    text-decoration: none;
 }
 
-h1{
+h1 {
+    text-align: center;
     background-color: #1F4F82;
     color: #4CAF50;
 }
@@ -38,7 +39,7 @@ ul.nav {
 
 li.navLi {
     float: left;
-    border-right:1px solid #bbb;
+    border-right: 1px solid #bbb;
 }
 
 li.navLi:last-child {
@@ -61,9 +62,15 @@ li.navLi a:hover:not(.active) {
     background-color: #04AA6D;
 }
 
-<!--Register-->
-    body {font-family: Arial, Helvetica, sans-serif;}
-* {box-sizing: border-box;}
+<!--
+Register-- >
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
 
 .input-container {
     display: -ms-flexbox; /* IE10 */
@@ -88,6 +95,22 @@ li.navLi a:hover:not(.active) {
 
 .input-field:focus {
     border: 2px solid dodgerblue;
+}
+
+.myText, select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.createTopic {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
 }
 
 /* Set a style for the submit button */
@@ -116,6 +139,12 @@ li.navLi a:hover:not(.active) {
 /*Successful*/
 .isa_success {
     color: #4F8A10;
+    background-color: #DFF2BF;
+    text-align: center;
+}
+
+.no_success {
+    color: #0000CD;
     background-color: #DFF2BF;
     text-align: center;
 }

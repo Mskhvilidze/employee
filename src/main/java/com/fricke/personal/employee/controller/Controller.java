@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import javax.servlet.http.HttpSession;
 import java.util.Iterator;
 import java.util.Spliterator;
@@ -25,7 +26,7 @@ public class Controller {
     @Autowired
     private AddressService addressService;
 
-    public  Controller(){
+    public Controller() {
 
     }
 
@@ -36,8 +37,11 @@ public class Controller {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/model/topic")
-    public String getEmployee(Model model, HttpSession session) {
+    public String getEmployee(Model model, HttpSession session, RedirectAttributes attributes) {
         model.addAttribute("topic", new Topic());
+        if (session.getAttribute("name") == null) {
+            model.addAttribute("noSession", "You must be logged in to be able to create articles");
+        }
         return "creation";
     }
 
@@ -96,7 +100,7 @@ public class Controller {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "model/logout")
-    public String getTest(Model model, HttpSession session, HttpStatus status, RedirectAttributes redirectAttributes){
+    public String getTest(Model model, HttpSession session, HttpStatus status, RedirectAttributes redirectAttributes) {
         session.removeAttribute("name");
         redirectAttributes.addFlashAttribute("successful", "Logout is successful");
         return "redirect:/model";
