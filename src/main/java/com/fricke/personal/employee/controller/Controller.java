@@ -37,7 +37,7 @@ public class Controller {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/model/topic")
-    public String getEmployee(Model model, HttpSession session, RedirectAttributes attributes) {
+    public String getEmployee(Model model, HttpSession session) {
         model.addAttribute("topic", new Topic());
         if (session.getAttribute("name") == null) {
             model.addAttribute("noSession", "You must be logged in to be able to create articles");
@@ -48,6 +48,8 @@ public class Controller {
     @RequestMapping(value = "/model/topic", method = RequestMethod.POST)
     public String getEmployeeSubmit(@ModelAttribute Topic topic, Model model, HttpSession session) {
         model.addAttribute("topic", topic);
+        Gamer gamer = gamerService.getGamer(session.getAttribute("name").toString());
+        topic.setGamer(gamer);
         service.addTopic(topic);
         return "redirect:/model/topics";
     }

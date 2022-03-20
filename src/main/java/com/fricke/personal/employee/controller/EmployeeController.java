@@ -2,7 +2,6 @@ package com.fricke.personal.employee.controller;
 
 import com.fricke.personal.employee.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +25,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "/topics/{id}")
     public Topic getEmployee(@PathVariable String id) {
-        return service.getEmployee(id);
+        return service.getTopic(id);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/topic/addEmployee")

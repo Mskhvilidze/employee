@@ -33,9 +33,9 @@
         <input class="myText" type="text" th:field="*{name}" name="Name"/>
         <label>Description</label>
         <textarea class="myText" type="text" th:field="*{description}" name="Description" rows="10"/>
+        <button type="submit" class="btn">Create</button>
     </form>
 </div>
-<p><input type="submit" value="submit"/></p>
 <p><input class="back" type="submit" value="back" th:value="back"
           th:onclick="location.href = '/fricke/model'"/></p></p>
 </body>

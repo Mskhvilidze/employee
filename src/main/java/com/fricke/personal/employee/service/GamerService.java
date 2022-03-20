@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Iterator;
+import java.util.Optional;
 
 @Service
 public class GamerService {
@@ -23,6 +24,14 @@ public class GamerService {
 
     public void addGamer(Gamer gamer) {
         repository.save(gamer);
+    }
+
+    public Gamer getGamer(String id) {
+        Optional<Gamer> gamer = repository.findByNickname(id);
+        if (gamer.isEmpty()) {
+            throw new IllegalArgumentException("Gamer cannot be null!");
+        }
+        return gamer.get();
     }
 
 }
