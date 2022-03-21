@@ -49,6 +49,7 @@ public class Controller {
     public String getEmployeeSubmit(@ModelAttribute Topic topic, Model model, HttpSession session) {
         model.addAttribute("topic", topic);
         Gamer gamer = gamerService.getGamer(session.getAttribute("name").toString());
+        System.out.println(topic.getDescription());
         topic.setGamer(gamer);
         service.addTopic(topic);
         return "redirect:/model/topics";
