@@ -9,6 +9,8 @@ import java.util.Objects;
 public class Topic {
     @Id
     @Column(nullable = false, unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String Identifier;
     private String name;
     private String description;
@@ -55,6 +57,14 @@ public class Topic {
 
     public String getDescription() {
         return description;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override

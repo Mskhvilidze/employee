@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Array;
 import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.Spliterators;
@@ -48,6 +49,8 @@ public class Controller {
     @RequestMapping(value = "/model/topic", method = RequestMethod.POST)
     public String getEmployeeSubmit(@ModelAttribute Topic topic, Model model, HttpSession session) {
         model.addAttribute("topic", topic);
+        String[] aa = {"Beka", "Ana", "Tekle"};
+        model.addAttribute("top", aa);
         Gamer gamer = gamerService.getGamer(session.getAttribute("name").toString());
         System.out.println(topic.getDescription());
         topic.setGamer(gamer);

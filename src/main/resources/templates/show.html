@@ -32,7 +32,7 @@
         <tbody>
         <tr th:each="topic: ${topics}">
             <td th:text="${topic.identifier}"></td>
-            <td class="inf" th:text="${topic.name}" th:value="${topic.description}"></td>
+            <td class="inf" th:text="${topic.name}" th:each="optionValue,iterStat : ${topic}" th:attr="data-id=${optionValue.description}"></td>
             <td th:text="${topic.gamer.firstname}"></td>
         </tr>
         </tbody>
@@ -45,7 +45,7 @@
     <!-- Modal content -->
     <div class="modal-content">
         <span class="close" id="clo">&times;</span>
-        <p id="descT">Some text in the Modal..</p>
+        <p id="descT"></p>
     </div>
 </div>
 
