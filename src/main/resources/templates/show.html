@@ -5,7 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/static/stylesheet/style.css" th:href="@{/stylesheet/style.css}"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../js/jq.js"></script>
     <title>Title</title>
 </head>
 <nav>
@@ -20,22 +21,34 @@
 </nav>
 <body>
 <h1 th:text="${message}"></h1>
-<table class="table table-dark">
-    <thead>
-    <tr>
-        <th>Identifier</th>
-        <th>Name</th>
-        <th>Description</th>
-    </tr>
-    <tbody>
-    <tr th:each="topic: ${topics}">
-        <td th:text="${topic.identifier}"></td>
-        <td th:text="${topic.name}"></td>
-        <td th:text="${topic.description}"></td>
-    </tr>
-    </tbody>
-    </thead>
-</table>
+<div class="TDark">
+    <table>
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Message</th>
+            <th>Name</th>
+        </tr>
+        <tbody>
+        <tr th:each="topic: ${topics}">
+            <td th:text="${topic.identifier}"></td>
+            <td class="inf" th:text="${topic.name}" th:value="${topic.description}"></td>
+            <td th:text="${topic.gamer.firstname}"></td>
+        </tr>
+        </tbody>
+        </thead>
+    </table>
+</div>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close" id="clo">&times;</span>
+        <p id="descT">Some text in the Modal..</p>
+    </div>
+</div>
+
 </body>
 </html>
 <script th:inline="javascript">
