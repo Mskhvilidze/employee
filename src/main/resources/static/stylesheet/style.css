@@ -165,7 +165,7 @@ table {
     justify-content: center;
 }
 
-.inf:hover {background-color: coral;}
+.td:hover {background-color: coral;}
 
 /*popup*/
 .modal {
@@ -209,4 +209,8 @@ table {
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+a:hover {
+    cursor:pointer;
 }

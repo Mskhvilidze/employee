@@ -32,7 +32,8 @@
         <tbody>
         <tr th:each="topic: ${topics}">
             <td th:text="${topic.identifier}"></td>
-            <td class="inf" th:text="${topic.name}" th:each="optionValue,iterStat : ${topic}" th:attr="data-id=${optionValue.description}"></td>
+            <td class="td"><a class="inf" id="infTD" th:text="${topic.name}" th:each="optionValue,iterStat : ${topic}"
+                   th:attr="data-id=${optionValue.description}"></a></td>
             <td th:text="${topic.gamer.firstname}"></td>
         </tr>
         </tbody>
