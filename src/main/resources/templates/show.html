@@ -28,13 +28,17 @@
             <th>Title</th>
             <th>Message</th>
             <th>Name</th>
+            <th>Delete</th>
+            <th>Update</th>
         </tr>
         <tbody>
         <tr th:each="topic: ${topics}">
-            <td th:text="${topic.identifier}"></td>
+            <td class="td" th:text="${topic.identifier}"></td>
             <td class="td"><a class="inf" id="infTD" th:text="${topic.name}" th:each="optionValue,iterStat : ${topic}"
                    th:attr="data-id=${optionValue.description}"></a></td>
             <td th:text="${topic.gamer.firstname}"></td>
+            <td class="td"><button class="btn" id="btn-danger">Delete</button></td>
+            <td class="td"><button class="btn" id="btn-update">Update</button></td>
         </tr>
         </tbody>
         </thead>

@@ -23,10 +23,19 @@ a {
     text-decoration: none;
 }
 
-h1 {
+a:hover {
+    cursor: pointer;
+}
+
+#infTD {
+    color: white;
+}
+
+h1, h2 {
     text-align: center;
     background-color: #1F4F82;
     color: #4CAF50;
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 
 ul.nav {
@@ -127,6 +136,25 @@ body {
     opacity: 1;
 }
 
+#btn-danger {
+    background: #DD2750;
+    border: 1px solid #C43352;
+    box-shadow: inset 0 0 1em gold, 0 0 1em red;
+    border-radius: 2em;
+    padding: 0.5em;
+    width: 5.5em;
+    height: 2.5em;
+}
+
+#btn-update {
+    border: 1px solid #C43352;
+    box-shadow: inset 0 0 1em gold, 0 0 1em dodgerblue;
+    border-radius: 2em;
+    padding: 0.5em;
+    width: 5.5em;
+    height: 2.5em;
+}
+
 /*Login*/
 /*Error*/
 .isa_error {
@@ -148,10 +176,23 @@ body {
     text-align: center;
 }
 
+.registerTag {
+    max-width: 500px;
+    margin: auto;
+    border-radius: 1em;
+    text-align: center;
+    font-size: 1.2em;
+    font-family: Helvetica;
+    box-shadow: inset 5px 5px 10px dodgerblue, rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    text-shadow: 5px 5px 10px dodgerblue;
+}
+
 /*Table*/
 table, td, th {
     border: 1px solid black;
     text-align: center;
+    color: white;
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 
 table {
@@ -160,12 +201,14 @@ table {
     background-position: center;
 }
 
-.TDark{
+.TDark {
     display: flex;
     justify-content: center;
 }
 
-.td:hover {background-color: coral;}
+.td:hover {
+    background-color: coral;
+}
 
 /*popup*/
 .modal {
@@ -178,8 +221,8 @@ table {
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 /* Modal Content */
@@ -209,8 +252,4 @@ table {
     color: #000;
     text-decoration: none;
     cursor: pointer;
-}
-
-a:hover {
-    cursor:pointer;
 }

@@ -28,23 +28,26 @@
 <div class="createTopic">
     <form action="#" th:action="@{/model/topic}" th:object="${topic}" method="post">
         <label>Title</label>
-        <input class="myText" type="text" th:field="*{identifier}" name="Identifier"/>
+        <input class="myText" type="text" th:field="*{identifier}" name="Identifier" required/>
         <label>Message</label>
-        <input class="myText" type="text" th:field="*{name}" name="Name"/>
+        <input class="myText" type="text" th:field="*{name}" name="Name" required/>
         <label>Description</label>
         <textarea class="myText" type="text" th:field="*{description}" name="Description" rows="10"/>
-        <button type="submit" class="btn">Create</button>
+        <button type="submit" class="btn" name=btn-Disable>Create</button>
     </form>
 </div>
-<p><input class="back" type="submit" value="back" th:value="back"
+<p><input class="back " type="submit" value="back" th:value="back"
           th:onclick="location.href = '/fricke/model'"/></p></p>
 </body>
 </html>
 
 <script th:inline="javascript">
     let userSession = [[${session.name}]];
+    let input = document.querySelector('[name="btn-Disable"]');
+    input.disabled = true;
     if (userSession != null) {
         document.getElementById("logOut").hidden = false;
+        input.disabled = false;
         let cells = document.getElementsByClassName("myText");
         for (let i = 0; i < cells.length; i++) {
             cells[i].disabled = false;
