@@ -34,4 +34,9 @@ public class GamerService {
         return gamer.get();
     }
 
+    public boolean isExistGamer(String id) {
+        Optional<Gamer> gamer = repository.findByNickname(id);
+        return gamer.isPresent();
+    }
+
 }

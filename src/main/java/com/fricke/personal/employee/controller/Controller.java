@@ -52,7 +52,6 @@ public class Controller {
         String[] aa = {"Beka", "Ana", "Tekle"};
         model.addAttribute("top", aa);
         Gamer gamer = gamerService.getGamer(session.getAttribute("name").toString());
-        System.out.println(topic.getDescription());
         topic.setGamer(gamer);
         service.addTopic(topic);
         return "redirect:/model/topics";
@@ -73,13 +72,20 @@ public class Controller {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/model/register")
-    public String getPostPerson(@ModelAttribute Gamer person, @ModelAttribute Address address, Model model, HttpSession session) {
+    public String getPostPerson(@ModelAttribute Gamer person, @ModelAttribute Address address, Model model, HttpSession session,
+                                RedirectAttributes redirectAttributes) {
         model.addAttribute("gamer", person);
         model.addAttribute("address", address);
-        gamerService.addGamer(person);
-        address.setGamer(person);
-        addressService.addAddress(address);
-        return "redirect:/model";
+        if (!gamerService.isExistGamer(person.getNickname())) {
+            addressService.addAddress(address);
+            person.setAddress(address);
+            gamerService.addGamer(person);
+            return "redirect:/model";
+        } else {
+            redirectAttributes.addFlashAttribute("no_successful", "User already exists");
+            return "redirect:/model/register";
+        }
+
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/model/login")

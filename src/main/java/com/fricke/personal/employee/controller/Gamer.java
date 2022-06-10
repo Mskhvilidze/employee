@@ -1,19 +1,21 @@
 package com.fricke.personal.employee.controller;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table()
 public class Gamer {
     @Id
+    @Column(nullable = false, unique = true)
     private String nickname;
     private String firstname;
     private String lastname;
     private String password;
     private String eMail;
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn
+    private Address address;
 
     public Gamer(String nickname, String password, String firstname, String lastname, String eMail) {
         this.nickname = nickname;
@@ -30,6 +32,10 @@ public class Gamer {
 
     public Gamer() {
 
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public void setNickname(String nickname) {
@@ -70,6 +76,10 @@ public class Gamer {
 
     public String getPassword() {
         return password;
+    }
+
+    public Address getAddress() {
+        return address;
     }
 
     @Override

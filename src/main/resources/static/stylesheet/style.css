@@ -210,6 +210,32 @@ table {
     background-color: coral;
 }
 
+.ul {
+    height: 4em;
+    padding: 0em 2em;
+    width: auto;
+    float: inside;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.ulLi {
+    list-style: none;
+    padding: 0em 2em;
+    font-weight: bold;
+    border: 0.01em solid #ccc;
+}
+
+select {
+    width: 126px;
+    padding: 6px;
+    margin: 5px 0px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    outline: none;
+}
+
 /*popup*/
 .modal {
     display: none; /* Hidden by default */

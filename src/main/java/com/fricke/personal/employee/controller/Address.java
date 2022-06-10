@@ -12,27 +12,15 @@ public class Address {
     private String plz;
     private String loc;
     private String number;
-    @ManyToOne(optional = false)
-    @JoinColumn
-    private Gamer gamer;
-    public Address() {
 
+    public Address() {
     }
 
-    public Address(String address, String plz, String loc, String number, Gamer gamer) {
+    public Address(String address, String plz, String loc, String number) {
         this.address = address;
         this.plz = plz;
         this.loc = loc;
         this.number = number;
-        this.gamer = gamer;
-    }
-
-    public void setGamer(Gamer gamer) {
-        this.gamer = gamer;
-    }
-
-    public Gamer getGamer() {
-        return gamer;
     }
 
     public void setAddress(String address) {
