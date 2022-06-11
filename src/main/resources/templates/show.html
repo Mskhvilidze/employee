@@ -54,7 +54,8 @@
 <div>
     <section>
         <p>View item a page</p>
-        <select name="" id="selectTopic">
+        <select name="" id="selectTopic" onchange="displayPage(2)">
+            <option value="NO SET">NO SET</option>
             <option value="2">2</option>
             <option value="4">4</option>
             <option value="6">6</option>
@@ -66,7 +67,7 @@
 </div>
 <ul class="pagination ul" style="max-width:150px;margin:auto">
     <li class="prev ulLi"><a href="#" id="prev">&#139</a></li>
-    <li class="next ulLi"><a href="#" id="next">&#155</a></li>
+    <!--<li class="next nextLi ulLi"><a href="#" id="next">&#155</a></li>-->
 </ul>
 <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -91,26 +92,4 @@
         document.getElementById("logIN").style.display = "block";
         document.getElementById("headReg").style.display = "block";
     }
-
-    function rowCount(e) {
-        let limit = parseInt(e.target.Nickname);
-        alert(limit);
-    }
-/*
-    function displayPage(limit) {
-        let tbody = document.querySelector("#tbody");
-        let tr = tbody.getElementsByTagName("tr");
-        let select = document.querySelector("select");
-        let ul = document.getElementsByClassName("pagination");
-
-        let arrayTr = [];
-        for (let i = 0; i < tr.length; i++) {
-            arrayTr.push(tr[i]);
-        }
-
-        tbody.innerHTML = "";
-        for (let i = 0; i < limit; i++) {
-            tbody.appendChild(arrayTr[i]);
-        }
-    }*/
 </script>
