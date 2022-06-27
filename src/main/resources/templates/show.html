@@ -19,7 +19,7 @@
         <li class="navLi"><a th:href="@{http://localhost:8086/fricke/model/topic}">Topic crete</a></li>
     </ul>
 </nav>
-<body>
+<body onchange="myFunction()">
 <h1 th:text="${message}"></h1>
 <div class="TDark">
     <table id="myTable">
@@ -38,10 +38,12 @@
                               th:attr="data-id=${optionValue.description}"></a></td>
             <td th:text="${topic.gamer.firstname}"></td>
             <td class="td">
-                <button class="btn deleteArt" id="btn-danger" th:attr="data-id=${topic.id}">Delete</button>
+                <a class="btn deleteArt" id="btn-danger" th:each="optionValue,iterStat : ${topic}"
+                   th:attr="data-id=${optionValue.gamer.nickname}" th:href="@{'topics/' + ${topic.id}}" role="button" th:object="${topic}"
+                >Delete</a>
             </td>
             <td class="td">
-                <button class="btn" id="btn-update">Update</button>
+                <button class="btn update" id="btn-update">Update</button>
             </td>
         </tr>
         </tbody>
@@ -54,19 +56,18 @@
 <div>
     <section>
         <p>View item a page</p>
-        <select name="" id="selectTopic" onchange="displayPage(2)">
-            <option value="NO SET">NO SET</option>
+        <select name="" id="selectTopic">
             <option value="2">2</option>
             <option value="4">4</option>
             <option value="6">6</option>
             <option value="8">8</option>
             <option value="10">10</option>
-            <option value="12">12</option>
+            <option value="12" selected>12</option>
         </select>
     </section>
 </div>
-<ul class="pagination ul" style="max-width:150px;margin:auto">
-    <li class="prev ulLi"><a href="#" id="prev">&#139</a></li>
+<ul class="pagination ul ulC" style="max-width:150px;margin:auto">
+    <li class="prev ulLi1"><a href="#" id="prev">&#139</a></li>
     <!--<li class="next nextLi ulLi"><a href="#" id="next">&#155</a></li>-->
 </ul>
 <!-- The Modal -->
@@ -78,7 +79,10 @@
         <p id="descT"></p>
     </div>
 </div>
-
+<br>
+<div class="isa_success" style="max-width:500px;margin:auto">
+    <p th:text="${successful}"></p>
+</div>
 </body>
 </html>
 <script th:inline="javascript">
@@ -91,5 +95,11 @@
         document.getElementById("logOut").hidden = true;
         document.getElementById("logIN").style.display = "block";
         document.getElementById("headReg").style.display = "block";
+    }
+
+    function myFunction() {
+        let body = document.querySelector(".isa_success");
+        body.innerHTML = "";
+        body.style.display = "block";
     }
 </script>

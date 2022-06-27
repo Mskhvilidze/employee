@@ -220,7 +220,7 @@ table {
     align-items: center;
 }
 
-.ulLi {
+.ulLi, .ulLi1 {
     list-style: none;
     padding: 0em 2em;
     font-weight: bold;

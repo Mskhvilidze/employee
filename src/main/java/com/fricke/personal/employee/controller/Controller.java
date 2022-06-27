@@ -49,8 +49,6 @@ public class Controller {
     @RequestMapping(value = "/model/topic", method = RequestMethod.POST)
     public String getEmployeeSubmit(@ModelAttribute Topic topic, Model model, HttpSession session) {
         model.addAttribute("topic", topic);
-        String[] aa = {"Beka", "Ana", "Tekle"};
-        model.addAttribute("top", aa);
         Gamer gamer = gamerService.getGamer(session.getAttribute("name").toString());
         topic.setGamer(gamer);
         service.addTopic(topic);
@@ -117,5 +115,13 @@ public class Controller {
         redirectAttributes.addFlashAttribute("successful", "Logout is successful");
         return "redirect:/model";
     }
-    //TODO Session muss auf jede Page aufgelöst werden
+
+    @RequestMapping(method = RequestMethod.GET, value = "model/topics/{id}")
+    public String deleteTopic(@PathVariable(name = "id") Long id, HttpSession session, RedirectAttributes redirectAttributes) {
+        if (session.getAttribute("name") == null) {
+            redirectAttributes.addFlashAttribute("successful", "Man muss angemeldet sein," +
+                    " um Artikel löschen zu können");
+        }
+        return "redirect:/model/topics";
+    }
 }
