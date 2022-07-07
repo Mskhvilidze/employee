@@ -11,6 +11,22 @@ $(document).ready(function () {
         }
     })
 
+    //Update-Button, Wenn du angemeldet bist und das Artikel ist von dir erstellt, darfst du aktualisieren, sonst nicht!
+    $(".btn-update").click(function (e) {
+        $("#myModal").css("display", "block");
+        let $target = $(e.target);
+        let nickname = $target.attr("data-id");
+        if (userSession != null) {
+            if (userSession.toString() == nickname) {
+                window.location.href = "http://localhost:8086/fricke/model/topics/update";
+            } else {
+                $("#descT").text("Artikel von anderen Benutzern, darfst du nicht ändern!");
+            }
+        } else {
+            $("#descT").text("Um Articel aktualisieren zu können, müssen sie sich anmelden!");
+        }
+    });
+
     //Article
     $("#clo").click(function () {
         $("#myModal").css("display", "none");
@@ -20,7 +36,7 @@ $(document).ready(function () {
     $(".deleteArt").click(function (e) {
         let $target = $(e.target);
         let nickname = $target.attr("data-id");
-        if (userSession.toString() != nickname){
+        if (userSession.toString() != nickname) {
             alert("Artikel von anderen Benutzer darfst du nicht löschen!");
         }
     });

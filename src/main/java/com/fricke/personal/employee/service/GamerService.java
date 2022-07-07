@@ -39,4 +39,15 @@ public class GamerService {
         return gamer.isPresent();
     }
 
+    public boolean isCompareNicknameWithSession(String nickname, Object session) {
+        Optional<Gamer> gamer = repository.findByNickname(nickname);
+        if (gamer.isEmpty()) {
+            throw new IllegalArgumentException("Gamer cannot be null!");
+        }
+
+        if (gamer.get().getNickname().equals(session.toString())) {
+            return true;
+        }
+        return false;
+    }
 }

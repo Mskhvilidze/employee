@@ -21,6 +21,9 @@
 </nav>
 <body onchange="myFunction()">
 <h1 th:text="${message}"></h1>
+<div class="isa_success" style="max-width:500px;margin:auto">
+    <p th:text="${successful}"></p>
+</div>
 <div class="TDark">
     <table id="myTable">
         <thead>
@@ -43,7 +46,9 @@
                 >Delete</a>
             </td>
             <td class="td">
-                <button class="btn update" id="btn-update">Update</button>
+                <button class="btn update btn-update" id="btn-update" type="button" th:each="optionValue,iterStat : ${topic}"
+                        th:attr="data-id=${optionValue.gamer.nickname}" th:href="@{'topics/' + ${topic.id}}" th:object="${topic}"> Update
+                </button>
             </td>
         </tr>
         </tbody>
@@ -78,10 +83,6 @@
         <span class="close" id="clo">&times;</span>
         <p id="descT"></p>
     </div>
-</div>
-<br>
-<div class="isa_success" style="max-width:500px;margin:auto">
-    <p th:text="${successful}"></p>
 </div>
 </body>
 </html>

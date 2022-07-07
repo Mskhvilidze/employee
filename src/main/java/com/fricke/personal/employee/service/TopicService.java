@@ -27,8 +27,8 @@ public class TopicService {
         repository.save(topic);
     }
 
-    public Topic getTopic(String id) {
-        Optional<Topic> topic = repository.findById(id);
+    public Topic getTopic(Long id) {
+        Optional<Topic> topic = repository.getTopById(id);
         if (topic.isEmpty()) {
             throw new IllegalArgumentException("Topic cannot be null!");
         }
@@ -44,8 +44,8 @@ public class TopicService {
         repository.save(topic);
     }
 
-    public void deleteTopic(String id) {
-        Optional<Topic> topic = repository.findById(id);
+    public void deleteTopic(Long id) {
+        Optional<Topic> topic = repository.getTopById(id);
         if (topic.isEmpty()) {
             throw new IllegalArgumentException("Topic cannot be null!");
         }

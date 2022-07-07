@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
-import java.lang.reflect.Array;
 import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.Spliterators;
@@ -118,10 +117,32 @@ public class Controller {
 
     @RequestMapping(method = RequestMethod.GET, value = "model/topics/{id}")
     public String deleteTopic(@PathVariable(name = "id") Long id, HttpSession session, RedirectAttributes redirectAttributes) {
+        Topic topic = service.getTopic(id);
         if (session.getAttribute("name") == null) {
             redirectAttributes.addFlashAttribute("successful", "Man muss angemeldet sein," +
                     " um Artikel löschen zu können");
+        } else if (!gamerService.isCompareNicknameWithSession(topic.getGamer().getNickname(), session.getAttribute("name"))) {
+            redirectAttributes.addFlashAttribute("successful", "Artikel von anderen darfst du nicht löschen");
+        } else {
+            service.deleteTopic(id);
+            //Ermitteln, ob Artikel wirklich gelöscht wurde
+            Stream<Topic> stream = Stream.generate(service.getAllTopic()::next);
+            boolean isExist = stream.allMatch(t -> t.getId() == id);
+            if (!isExist) {
+                redirectAttributes.addFlashAttribute("successful", "Artikel wurde dauerhaft gelöscht");
+            } else {
+                redirectAttributes.addFlashAttribute("successful", "Etwas ist shifgelaufen!");
+            }
+
         }
         return "redirect:/model/topics";
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "model/topics/update")
+    public String updateTopic(Model model, HttpSession session) {
+        model.addAttribute("topicsa", service.getAllTopic());
+        System.out.println("A");
+        return "update";
+    }
+
 }

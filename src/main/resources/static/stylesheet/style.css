@@ -120,7 +120,11 @@ body {
     background-color: #f2f2f2;
     padding: 20px;
 }
-
+.updateTopic {
+    border-radius: 5px;
+    background-color: #333333;
+    padding: 20px;
+}
 /* Set a style for the submit button */
 .btn {
     background-color: dodgerblue;
@@ -279,3 +283,5 @@ select {
     text-decoration: none;
     cursor: pointer;
 }
+
+/*Update PopUp-Windows*/

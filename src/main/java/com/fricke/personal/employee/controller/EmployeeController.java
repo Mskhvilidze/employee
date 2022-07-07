@@ -24,7 +24,7 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/topics/{id}")
-    public Topic getEmployee(@PathVariable String id) {
+    public Topic getEmployee(@PathVariable Long id) {
         return service.getTopic(id);
     }
 
@@ -44,7 +44,7 @@ public class EmployeeController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/topic/delete/{id}")
-    public void deleteTopic(@PathVariable String id) {
+    public void deleteTopic(@PathVariable Long id) {
         service.deleteTopic(id);
     }
 }
