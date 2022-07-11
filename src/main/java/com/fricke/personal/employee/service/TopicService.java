@@ -35,13 +35,13 @@ public class TopicService {
         return topic.get();
     }
 
-    public void updateTopic(Topic topic, String id) {
-        Optional<Topic> updatedTopic = repository.findById(id);
+    public void updateTopic(Topic topic, Long id) {
+        Optional<Topic> updatedTopic = repository.getTopById(id);
         if (updatedTopic.isEmpty()) {
             throw new IllegalArgumentException("Topic cannot be null!");
         }
-        repository.delete(updatedTopic.get());
         repository.save(topic);
+        //repository.delete(updatedTopic.get());
     }
 
     public void deleteTopic(Long id) {

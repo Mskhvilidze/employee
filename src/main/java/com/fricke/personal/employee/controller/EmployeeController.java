@@ -39,7 +39,7 @@ public class EmployeeController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/topic/update/{id}")
-    public void updateTopic(@RequestBody Topic topic, @PathVariable String id) {
+    public void updateTopic(@RequestBody Topic topic, @PathVariable Long id) {
         service.updateTopic(topic, id);
     }
 

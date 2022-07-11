@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--suppress XmlUnboundNsPrefix -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/stylesheet/style.css" th:href="@{/stylesheet/style.css}"/>
+</head>
+<nav>
+    <ul class="nav">
+        <li class="navLi"><a class="active" th:href="@{http://localhost:8086/fricke/model}">Home</a></li>
+        <li class="navLi" id="logIN"><a th:href="@{http://localhost:8086/fricke/model/login}">Log In</a></li>
+        <li class="navLi" id="logOut"><a th:href="@{http://localhost:8086/fricke/model/logout}">Log
+            Out</a></li>
+        <li class="navLi"><a th:href="@{http://localhost:8086/fricke/model/topics}">Topics</a></li>
+        <li class="navLi"><a th:href="@{http://localhost:8086/fricke/model/topic}">Topic crete</a></li>
+    </ul>
+</nav>
+<body>
+<h1 th:text="${message}"></h1>
+<h1>Topic Update</h1>
+<br>
+<div class="no_success" id="noSess" style="max-width:500px;margin:auto">
+    <p th:text="${noSession}"></p>
+</div>
+<div class="isa_success" style="max-width:500px;margin:auto">
+    <p th:text="${successful}"></p>
+</div>
+<div class="createTopic" >
+    <form action="#" th:action="@{'/model/topics/update/' + ${topics.id}}" th:object="${topics}" method="post">
+        <label>Title</label>
+        <input class="myText" type="text" th:field="*{identifier}" name="Identifier" required/>
+        <label>Message</label>
+        <input class="myText" type="text" th:field="*{name}" name="Name" required/>
+        <label>Description</label>
+        <textarea class="myText" type="text" th:field="*{description}" name="Description" rows="10"/>
+        <button type="submit" class="btn btn-upd" name=btn-Disable>Update</button>
+    </form>
+</div>
+<p><input class="back " type="submit" value="back" th:value="back"
+          th:onclick="location.href = '/fricke/model'"/></p></p>
+</body>
+</html>
+
+<script th:inline="javascript">
+    let userSession = [[${session.name}]];
+    let input = document.querySelector('[name="btn-Disable"]');
+    input.disabled = true;
+    if (userSession != null) {
+        document.getElementById("logOut").hidden = false;
+        input.disabled = false;
+        let cells = document.getElementsByClassName("myText");
+        for (let i = 0; i < cells.length; i++) {
+            cells[i].disabled = false;
+        }
+        document.getElementById("logIN").style.display = "none";
+        document.getElementById("headReg").style.display = "none";
+    } else {
+        document.getElementById("logOut").hidden = true;
+        let cells = document.getElementsByClassName("myText");
+        for (let i = 0; i < cells.length; i++) {
+            cells[i].disabled = true;
+        }
+        document.getElementById("logIN").style.display = "block";
+        document.getElementById("headReg").style.display = "block";
+    }
+</script>

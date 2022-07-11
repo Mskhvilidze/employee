@@ -1,5 +1,6 @@
 package com.fricke.personal.employee.controller;
 
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import com.fricke.personal.employee.service.AddressService;
 import com.fricke.personal.employee.service.GamerService;
 import com.fricke.personal.employee.service.TopicService;
@@ -138,11 +139,30 @@ public class Controller {
         return "redirect:/model/topics";
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "model/topics/update")
-    public String updateTopic(Model model, HttpSession session) {
-        model.addAttribute("topicsa", service.getAllTopic());
-        System.out.println("A");
-        return "update";
+    @RequestMapping(method = RequestMethod.GET, value = "model/topics/update/{id}")
+    public String updatePage(@PathVariable(name = "id") Long id, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+        model.addAttribute("topics", service.getTopic(id));
+        Topic topic = service.getTopic(id);
+        if (session.getAttribute("name") != null && session.getAttribute("name").equals(topic.getGamer().getNickname())) {
+            return "update";
+        }
+        redirectAttributes.addFlashAttribute("successful", "Sie sind leider nicht angemeldet!");
+        return "redirect:/model/topics";
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "model/topics/update/{id}")
+    public String updateTopic(@PathVariable(name = "id") Long id, HttpSession session, RedirectAttributes redirectAttributes,
+                              @ModelAttribute Topic topicUpdated) {
+        Topic topic = service.getTopic(id);
+        Gamer gamer = gamerService.getGamer(topic.getGamer().getNickname());
+        if (session.getAttribute("name") != null &&
+                gamerService.isCompareNicknameWithSession(topic.getGamer().getNickname(), session.getAttribute("name")) && gamer != null) {
+            topicUpdated.setGamer(gamer);
+            service.updateTopic(topicUpdated, id);
+            redirectAttributes.addFlashAttribute("successful", "Artikel wurde aktualisiert");
+            return "redirect:/model/topics";
+        }
+        redirectAttributes.addFlashAttribute("successful", "Etwa ist schief gelaufen!");
+        return "redirect:/model/topics/update/" + id;
+    }
 }

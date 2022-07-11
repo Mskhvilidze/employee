@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface TopicRepository extends CrudRepository<Topic, String> {
     Optional<Topic> getTopById(Long id);
+    //void update(Topic topic);
 }

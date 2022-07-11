@@ -47,7 +47,7 @@
             </td>
             <td class="td">
                 <button class="btn update btn-update" id="btn-update" type="button" th:each="optionValue,iterStat : ${topic}"
-                        th:attr="data-id=${optionValue.gamer.nickname}" th:href="@{'topics/' + ${topic.id}}" th:object="${topic}"> Update
+                        th:attr="data-name=${optionValue.gamer.nickname}, data-id=${topic.id}" th:href="@{'topics/update/' + ${optionValue.id}}" th:object="${topic}"> Update
                 </button>
             </td>
         </tr>

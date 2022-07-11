@@ -15,10 +15,11 @@ $(document).ready(function () {
     $(".btn-update").click(function (e) {
         $("#myModal").css("display", "block");
         let $target = $(e.target);
-        let nickname = $target.attr("data-id");
+        let nickname = $target.attr("data-name");
         if (userSession != null) {
             if (userSession.toString() == nickname) {
-                window.location.href = "http://localhost:8086/fricke/model/topics/update";
+                let id = $target.attr("data-id");
+                window.location.href = "http://localhost:8086/fricke/model/topics/update/" + id;
             } else {
                 $("#descT").text("Artikel von anderen Benutzern, darfst du nicht ändern!");
             }
