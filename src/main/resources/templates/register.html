@@ -13,6 +13,9 @@
         <li class="navLi"><a th:href="@{http://localhost:8086/fricke/model/login}">Log In</a></li>
         <li class="navLi"><a th:href="@{http://localhost:8086/fricke/model/topics}">Topics</a></li>
         <li class="navLi"><a th:href="@{http://localhost:8086/fricke/model/topic}">Topic crete</a></li>
+        <li class="navLi" style="float: right" id="prof"><a th:href="@{http://localhost:8086/fricke/model/profile}"><img
+                src="./icon/profil.jpg"
+                style="max-width: 0.9em" onload="btnHidden()"></a></li>
     </ul>
 </nav>
 <body id="showMessageReg">
@@ -91,10 +94,10 @@
 <script th:inline="javascript">
 
     let userSession = [[${session.name}]];
-    if (userSession != null){
+    if (userSession != null) {
         document.getElementById("showMessageReg").style.display = "none";
         document.getElementById("logOut").hidden = false;
-    }else{
+    } else {
         document.getElementById("showMessageReg").style.display = "block";
         document.getElementById("logOut").hidden = true;
     }
@@ -127,4 +130,11 @@
         }
     }
 
+    function btnHidden() {
+        if (userSession != null) {
+            document.getElementById("prof").style.display = "block";
+        } else {
+            document.getElementById("prof").style.display = "none";
+        }
+    }
 </script>

@@ -120,11 +120,13 @@ body {
     background-color: #f2f2f2;
     padding: 20px;
 }
+
 .updateTopic {
     border-radius: 5px;
     background-color: #333333;
     padding: 20px;
 }
+
 /* Set a style for the submit button */
 .btn {
     background-color: dodgerblue;
@@ -284,4 +286,88 @@ select {
     cursor: pointer;
 }
 
-/*Update PopUp-Windows*/
+/*Profile*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
+
+
+.bodyProfile {
+    background-color: #545454;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+}
+
+.container {
+    height: 100vh;
+}
+
+.card {
+
+    width: 450px;
+    border: none;
+    border-radius: 15px;
+    padding: 8px;
+    background-color: #fff;
+    position: relative;
+    height: 450px;
+}
+
+.upper {
+
+    height: 100px;
+
+}
+
+.upper img {
+
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+}
+
+.user {
+    position: relative;
+}
+
+.profile img {
+
+
+    height: 80px;
+    width: 80px;
+    margin-top: 2px;
+
+
+}
+
+.profile {
+
+    position: absolute;
+    top: -50px;
+    left: 38%;
+    height: 90px;
+    width: 90px;
+    border: 3px solid #fff;
+
+    border-radius: 50%;
+
+}
+
+.follow {
+
+    border-radius: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 35px;
+}
+
+.stats {
+    float: left;
+    margin: 1em;
+    font-size: 29px;
+}
+
+/*Like Bild*/
+#like {
+    max-height: 1.5em;
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}

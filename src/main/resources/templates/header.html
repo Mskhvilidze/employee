@@ -18,6 +18,8 @@
             Out</a></li>
         <li class="navLi"><a th:href="@{http://localhost:8086/fricke/model/topics}">Topics</a></li>
         <li class="navLi"><a th:href="@{http://localhost:8086/fricke/model/topic}">Topic crete</a></li>
+        <li class="navLi" style="float: right" id="prof"><a th:href="@{http://localhost:8086/fricke/model/profile}"><img src="./icon/profil.jpg"
+        style="max-width: 0.9em"></a> </li>
     </ul>
 </nav>
 <body>
@@ -40,9 +42,11 @@
         document.getElementById("logIN").style.display = "none";
         document.getElementById("headReg").style.display = "none";
         document.getElementById("logOut").hidden = false;
+        document.getElementById("prof").hidden = false;
     } else {
         document.getElementById("logIN").style.display = "block";
         document.getElementById("headReg").style.display = "block";
         document.getElementById("logOut").hidden = true;
+        document.getElementById("prof").hidden = true;
     }
 </script>

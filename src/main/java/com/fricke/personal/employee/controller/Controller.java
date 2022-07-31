@@ -165,4 +165,18 @@ public class Controller {
         redirectAttributes.addFlashAttribute("successful", "Etwa ist schief gelaufen!");
         return "redirect:/model/topics/update/" + id;
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "model/profile")
+    public String getString(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+        if (session.getAttribute("name") != null) {
+            Gamer gamer = gamerService.getGamer(session.getAttribute("name").toString());
+            model.addAttribute("user", gamer);
+            model.addAttribute("count", service.getNumberOfTopics(gamer.getNickname()));
+
+            System.out.println(service.getRanking());
+            return "profile";
+        }
+        redirectAttributes.addFlashAttribute("successful", "Sie müssen sich anmelden!");
+        return "redirect:/model";
+    }
 }

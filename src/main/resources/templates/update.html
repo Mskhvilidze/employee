@@ -16,6 +16,9 @@
             Out</a></li>
         <li class="navLi"><a th:href="@{http://localhost:8086/fricke/model/topics}">Topics</a></li>
         <li class="navLi"><a th:href="@{http://localhost:8086/fricke/model/topic}">Topic crete</a></li>
+        <li class="navLi" style="float: right" id="prof"><a th:href="@{http://localhost:8086/fricke/model/profile}"><img
+                src="@../icon/profil.jpg"
+                style="max-width: 0.9em" onload="btnHidden()"></a></li>
     </ul>
 </nav>
 <body>
@@ -28,14 +31,14 @@
 <div class="isa_success" style="max-width:500px;margin:auto">
     <p th:text="${successful}"></p>
 </div>
-<div class="createTopic" >
+<div class="createTopic">
     <form action="#" th:action="@{'/model/topics/update/' + ${topics.id}}" th:object="${topics}" method="post">
         <label>Title</label>
-        <input class="myText" type="text" th:field="*{identifier}" name="Identifier" required/>
+        <input class="myText" type="text" th:field="*{identifier}" name="Identifier" value="topics.Identifier" required/>
         <label>Message</label>
-        <input class="myText" type="text" th:field="*{name}" name="Name" required/>
+        <input class="myText" type="text" th:field="*{name}" name="Name" value="topics.name" required/>
         <label>Description</label>
-        <textarea class="myText" type="text" th:field="*{description}" name="Description" rows="10"/>
+        <textarea class="myText" type="text" th:field="*{description}" name="Description" value="topics.description" rows="10"/>
         <button type="submit" class="btn btn-upd" name=btn-Disable>Update</button>
     </form>
 </div>
@@ -65,5 +68,13 @@
         }
         document.getElementById("logIN").style.display = "block";
         document.getElementById("headReg").style.display = "block";
+    }
+
+    function btnHidden() {
+        if (userSession != null) {
+            document.getElementById("prof").style.display = "block";
+        } else {
+            document.getElementById("prof").style.display = "none";
+        }
     }
 </script>
