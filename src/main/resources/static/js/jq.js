@@ -179,4 +179,95 @@ $(document).ready(function () {
             tbody.appendChild(arrayTr[i]);
         }
     });
+
+    //Like Icon
+    $(".like").click(function (e) {
+        let like = document.getElementsByClassName("like");
+        let target = $(e.target);
+        let topicID = target.attr("data-id");
+        let userID = userSession.toString();
+        let likes = document.getElementsByClassName("likes");
+        let idForLikes = "";
+        for (let b = 0; b < likes.length; b++) {
+            if (likes[b].getAttribute("userID") == userSession.toString() && likes[b].getAttribute("topicID") == topicID) {
+                idForLikes = likes[b].getAttribute("id");
+            }
+        }
+        let temp = userID + ":" + topicID;
+        let tempDelete = userID + ":" + topicID + ":" + idForLikes;
+        $.ajax({
+            url: "http://localhost:8086/fricke/model/topics",
+            type: "POST",
+            data: temp,
+            cache: false,
+            dataType: "text",
+            contentType: "application/json",
+            success: function (response) {
+                if (userSession != null) {
+                    for (let k = 0; k < like.length; k++) {
+                        if (like[k].getAttribute("data-id") == target.attr("data-id")) {
+                            if (like[k].style.backgroundColor == "green") {
+                                like[k].style.backgroundColor = "#888888";
+                            } else {
+                                like[k].style.backgroundColor = "green";
+                            }
+                        }
+                    }
+                }
+            },
+            error: function (xhr, ajaxOption, thrownError) {
+                alert(xhr.status);
+            },
+            statusCode: {
+                404: function () {
+                    alert("page not found");
+                }
+            },
+
+            statusCode: {
+                500: function () {
+                    alert("HoPlA");
+                }
+            }
+
+        })
+
+        $.ajax({
+            url: "http://localhost:8086/fricke/model/topics",
+            type: "DELETE",
+            data: tempDelete,
+            cache: false,
+            dataType: "text",
+            contentType: "application/json",
+            success: function (response) {
+
+           /*     if (userSession != null) {
+                    for (let k = 0; k < like.length; k++) {
+                        if (like[k].getAttribute("data-id") == target.attr("data-id")) {
+                            if (like[k].style.backgroundColor == "green") {
+                                like[k].style.backgroundColor = "#888888";
+                            } else {
+                                like[k].style.backgroundColor = "green";
+                            }
+                        }
+                    }
+                }*/
+            },
+            error: function (xhr, ajaxOption, thrownError) {
+                alert(xhr.status);
+            },
+            statusCode: {
+                404: function () {
+                    alert("page not found");
+                }
+            },
+
+            statusCode: {
+                500: function () {
+                    alert("HoPlA");
+                }
+            }
+
+        })
+    });
 });

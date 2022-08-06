@@ -22,7 +22,7 @@
                 style="max-width: 0.9em" onload="btnHidden()"></a></li>
     </ul>
 </nav>
-<body onchange="myFunction()">
+<body onchange="myFunction()" onload="isLike()">
 <h1 th:text="${message}"></h1>
 <div class="isa_success" style="max-width:500px;margin:auto">
     <p th:text="${successful}"></p>
@@ -40,25 +40,29 @@
             <th>Number</th>
         </tr>
         <tbody id="tbody">
-        <tr th:each="topic: ${topics}" id="tr">
-            <td class="td" th:text="${topic.identifier}"></td>
-            <td class="td"><a class="inf" id="infTD" th:text="${topic.name}" th:each="optionValue,iterStat : ${topic}"
-                              th:attr="data-id=${optionValue.description}"></a></td>
-            <td class="td" th:text="${topic.gamer.firstname}"></td>
-            <td class="td">
-                <a class="btn deleteArt" id="btn-danger" th:each="optionValue,iterStat : ${topic}"
-                   th:attr="data-id=${optionValue.gamer.nickname}" th:href="@{'topics/' + ${topic.id}}" role="button" th:object="${topic}"
-                >Delete</a>
-            </td>
-            <td class="td">
-                <button class="btn update btn-update" id="btn-update" type="button" th:each="optionValue,iterStat : ${topic}"
-                        th:attr="data-name=${optionValue.gamer.nickname}, data-id=${topic.id}"
-                        th:href="@{'topics/update/' + ${optionValue.id}}" th:object="${topic}"> Update
-                </button>
-            </td>
-            <td class="td"><img src="../icon/like.png" id="like" onclick="onLike()"></td>
-            <th class="td"></th>
-        </tr>
+        <p th:each="like, out : ${likes}" class="likes" th:attr="userID=${like.userID}, topicId = ${like.topicId}, id=${like.id}">
+            <tr th:each="topic: ${topics}" id="tr">
+                <td class="td" th:text="${topic.identifier}"></td>
+                <td class="td"><a class="inf" id="infTD" th:text="${topic.name}" th:each="optionValue,iterStat : ${topic}"
+                                  th:attr="data-id=${optionValue.description}"></a></td>
+                <td class="td" th:text="${topic.gamer.firstname}"></td>
+                <td class="td">
+                    <a class="btn deleteArt" id="btn-danger" th:each="optionValue,iterStat : ${topic}"
+                       th:attr="data-id=${optionValue.gamer.nickname}" th:href="@{'topics/' + ${topic.id}}" role="button"
+                       th:object="${topic}"
+                    >Delete</a>
+                </td>
+                <td class="td">
+                    <button class="btn update btn-update" id="btn-update" type="button" th:each="optionValue,iterStat : ${topic}"
+                            th:attr="data-name=${optionValue.gamer.nickname}, data-id=${topic.id}"
+                            th:href="@{'topics/update/' + ${optionValue.id}}" th:object="${topic.gamer.nickname}"> Update
+                    </button>
+                </td>
+                <td class="td"><img src="../icon/like.png" class="like" th:each="optionValue,iterStat : ${topic}"
+                                    th:attr="data-name=${optionValue.gamer.nickname}, data-id=${topic.id}">
+                </td>
+                <th class="td"></th>
+            </tr>
         </tbody>
         </thead>
     </table>
@@ -96,6 +100,7 @@
 </html>
 <script th:inline="javascript">
     let userSession = [[${session.name}]];
+
     if (userSession != null) {
         document.getElementById("logOut").hidden = false;
         document.getElementById("logIN").style.display = "none";
@@ -112,19 +117,24 @@
         body.style.display = "block";
     }
 
+    function isLike() {
+        let likes = document.getElementsByClassName("likes");
+        let like = document.getElementsByClassName("like");
+        for (let i = 0; i < likes.length; i++) {
+            for (let j = 0; j < like.length; j++) {
+                if (userSession.toString() == likes[i].getAttribute("userID") &&
+                    likes[i].getAttribute("topicID") == like[j].getAttribute("data-id")) {
+                    like[j].style.backgroundColor = "green";
+                }
+            }
+        }
+    }
+
     function btnHidden() {
         if (userSession != null) {
             document.getElementById("prof").style.display = "block";
         } else {
             document.getElementById("prof").style.display = "none";
-        }
-    }
-
-    function onLike() {
-        let like = document.getElementById("like");
-
-        if (userSession != null) {
-            like.style.backgroundColor = "green";
         }
     }
 </script>

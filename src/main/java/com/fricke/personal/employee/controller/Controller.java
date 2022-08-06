@@ -1,8 +1,8 @@
 package com.fricke.personal.employee.controller;
 
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import com.fricke.personal.employee.service.AddressService;
 import com.fricke.personal.employee.service.GamerService;
+import com.fricke.personal.employee.service.LikeService;
 import com.fricke.personal.employee.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
-import java.util.Iterator;
-import java.util.Spliterator;
-import java.util.Spliterators;
+import java.util.*;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -26,6 +24,8 @@ public class Controller {
     private GamerService gamerService;
     @Autowired
     private AddressService addressService;
+    @Autowired
+    private LikeService likeService;
 
     public Controller() {
 
@@ -59,6 +59,7 @@ public class Controller {
     public String getTopics(Model model, HttpSession session) {
         model.addAttribute("message", "All Topics");
         model.addAttribute("topics", service.getAllTopic());
+        model.addAttribute("likes", likeService.getAllLikes());
         return "show";
     }
 
@@ -173,10 +174,37 @@ public class Controller {
             model.addAttribute("user", gamer);
             model.addAttribute("count", service.getNumberOfTopics(gamer.getNickname()));
 
-            System.out.println(service.getRanking());
             return "profile";
         }
         redirectAttributes.addFlashAttribute("successful", "Sie müssen sich anmelden!");
         return "redirect:/model";
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "model/topics")
+    public String getLike(@RequestBody String name) {
+        //Array text spliten
+        String[] topicLikes = name.split(":");
+
+        if (topicLikes.length == 2) {
+            Likes likes = new Likes(topicLikes[1], topicLikes[0]);
+
+            if (!likeService.isContains(likes)) {
+                likeService.likeSave(likes);
+            }
+        }
+        return "show";
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "model/topics")
+    public String getLike(@RequestBody String name, RedirectAttributes redirectAttributes) {
+        //Array text spliten
+        String[] topicLikes = name.split(":");
+        if (topicLikes.length == 3) {
+            Likes likes = new Likes(Long.parseLong(topicLikes[2]), topicLikes[1], topicLikes[0]);
+            if (likeService.isContains(likes)) {
+                likeService.disLike(likes);
+            }
+        }
+        return "show";
     }
 }
