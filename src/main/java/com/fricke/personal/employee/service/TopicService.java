@@ -1,5 +1,6 @@
 package com.fricke.personal.employee.service;
 
+import com.fricke.personal.employee.controller.Gamer;
 import com.fricke.personal.employee.controller.Topic;
 import com.fricke.personal.employee.repository.TopicRepository;
 import org.apache.logging.log4j.util.PropertySource;
@@ -67,14 +68,8 @@ public class TopicService {
         return String.valueOf(count);
     }
 
-    public String getRanking() {
-        Iterator<Topic> iterator = repository.findAll().iterator();
-        Spliterator<Topic> spliterator = Spliterators.spliteratorUnknownSize(iterator, Spliterator.SORTED);
-        Stream<Topic> stream = StreamSupport.stream(spliterator, false);
-
-        Map<String, Long> map = new HashMap<>();
-        List<Topic> list = stream.distinct().collect(Collectors.toList());
-        
-        return "";
+    public void queryTopicByIdAndName(Long id, String name) {
+        Integer a = repository.queryTopicByIdAndName(id, name);
+        System.out.println(a);
     }
 }

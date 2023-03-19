@@ -14,6 +14,7 @@ public class Topic {
     private String Identifier;
     private String name;
     private String description;
+    private String countLikes;
     @ManyToOne(optional = false)
     @JoinColumn
     private Gamer gamer;
@@ -47,6 +48,10 @@ public class Topic {
         this.description = description;
     }
 
+    public void setCountLikes(String countLikes) {
+        this.countLikes = countLikes;
+    }
+
     public String getIdentifier() {
         return Identifier;
     }
@@ -57,6 +62,10 @@ public class Topic {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getCountLikes() {
+        return countLikes;
     }
 
     public Long getId() {

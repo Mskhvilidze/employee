@@ -1,14 +1,13 @@
 package com.fricke.personal.employee.service;
 
 import com.fricke.personal.employee.controller.Likes;
+import com.fricke.personal.employee.controller.Topic;
 import com.fricke.personal.employee.repository.LikeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Iterator;
-import java.util.Optional;
-import java.util.Spliterator;
-import java.util.Spliterators;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -49,5 +48,13 @@ public class LikeService {
             return true;
         }
         return false;
+    }
+
+    public Long getCountLikes(String topicID) {
+        Iterator<Likes> likesIterator = repository.findAll().iterator();
+        Spliterator<Likes> spliterators = Spliterators.spliteratorUnknownSize(likesIterator, Spliterator.ORDERED);
+        Stream<Likes> likesStream = StreamSupport.stream(spliterators, false);
+
+        return likesStream.filter(f -> f.getTopicId().equals(topicID)).count();
     }
 }

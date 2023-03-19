@@ -60,6 +60,7 @@ public class Controller {
         model.addAttribute("message", "All Topics");
         model.addAttribute("topics", service.getAllTopic());
         model.addAttribute("likes", likeService.getAllLikes());
+        service.queryTopicByIdAndName((long) 1, "Inter vs Fiorentina");
         return "show";
     }
 
@@ -190,6 +191,8 @@ public class Controller {
 
             if (!likeService.isContains(likes)) {
                 likeService.likeSave(likes);
+                Topic topicUpdated = service.getTopic(Long.parseLong(topicLikes[1]));
+                topicUpdated.setCountLikes(String.valueOf(likeService.getCountLikes(topicLikes[1])));
             }
         }
         return "show";
@@ -203,6 +206,8 @@ public class Controller {
             Likes likes = new Likes(Long.parseLong(topicLikes[2]), topicLikes[1], topicLikes[0]);
             if (likeService.isContains(likes)) {
                 likeService.disLike(likes);
+                Topic topicUpdated = service.getTopic(Long.parseLong(topicLikes[1]));
+                topicUpdated.setCountLikes(String.valueOf(likeService.getCountLikes(topicLikes[1])));
             }
         }
         return "show";
